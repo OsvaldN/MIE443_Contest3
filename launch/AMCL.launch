@@ -1,0 +1,25 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+    <!-- Map server -->
+    <arg name="map_file" default="$(env TURTLEBOT_MAP_FILE)"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- AMCL -->
+    <arg name="custom_amcl_launch_file" default="$(find mie443_contest3)/launch/includes/amcl/amcl.launch.xml"/>
+    <arg name="initial_pose_x" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+    <arg name="initial_pose_y" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+    <arg name="initial_pose_a" default="0.0"/>
+    <include file="$(arg custom_amcl_launch_file)">
+        <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+        <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+        <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+    </include>
+
+    <!-- Move base -->
+    <arg name="custom_param_file" default="$(find mie443_contest3)/param/kinect_costmap_params.yaml"/>
+    <include file="$(find mie443_contest3)/launch/includes/move_base.launch.xml">
+        <arg name="custom_param_file" value="$(arg custom_param_file)"/>
+    </include>
+    <include file="$(find turtlebot_rviz_launchers)/launch/view_navigation.launch">
+    </include>
+</launch>
