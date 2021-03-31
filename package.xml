@@ -1,0 +1,44 @@
+<package>
+  <name>mie443_contest3</name>
+  <version>0.0.0</version>
+  <description>Tutorial for image_transport. This is useful for the tutorials at http://wiki.ros.org/image_transport/Tutorials/</description>
+  <author>Person</author>
+  <maintainer email="Person@mail.com"></maintainer>
+  <license>Apache 2.0</license>
+
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roslib</build_depend>
+
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>move_base_msgs</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>map_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>costmap_2d</build_depend>
+  <build_depend>actionlib</build_depend>
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+    <gazebo_ros gazebo_model_path="${prefix}/worlds/model"/> 
+    <gazebo_ros gazebo_modia_path="${prefix}/worlds/model"/> 
+  </export>
+
+</package>

@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='vismarker'>
+    <pose frame=''>-0.685 -2.15 0 0 -0 0</pose>
+    <link name='Wall_1'>
+      <collision name='Wall_1_Collision'>
+        <geometry>
+          <box>
+            <size>0.76 0.75 0.01</size>
+          </box>
+        </geometry>
+        <pose frame=''>0 0 0.005 0 -0 0</pose>
+      </collision>
+      <visual name='Wall_1_Visual'>
+        <pose frame=''>0 0 0.005 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.76 0.75 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>0.996078 0.47451 0.0196078 1</ambient>
+        </material>
+      </visual>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </link>
+    <static>false</static>
+  </model>
+</sdf>
