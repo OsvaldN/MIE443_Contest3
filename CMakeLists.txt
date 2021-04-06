@@ -55,6 +55,11 @@ add_executable(contest3
     src/costmap_client.cpp
     src/explore.cpp
     src/frontier_search.cpp
+
+    src/interaction.cpp
+    src/control.cpp
+    src/callback.cpp
+    src/bumper.cpp
     )
 target_link_libraries(contest3
     ${catkin_LIBRARIES}
