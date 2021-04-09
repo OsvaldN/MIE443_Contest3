@@ -40,11 +40,15 @@ int main(int argc, char** argv) {
 
     while(ros::ok()) {
 
-        // NOTE: Still have to implement explore.stop() functionality when the robot finds a victim. 
+        /** NOTE: Add the check for victim locator here from subscribed topic
+        if (victim_located) {
+            explore.stop(); // Stop exploration
 
         /** DEBUG REMOVE: @David's interaction code is found below.
          * Ask Oz's model for the image type, and then pass that into Interact function
-        Interact(0, &vel_pub, path_to_sounds, true); // DEBUG REMOVE
+            Interact(0, &vel_pub, path_to_sounds, true); // DEBUG REMOVE
+            explore.start(); // Re-continue exploration
+        }
         **/
 
         ros::spinOnce();
