@@ -25,6 +25,7 @@
 #include "callback.h"
 #include "control.h"
 #include "interaction.h"
+#include "play_video.h"
 
 // ======= MACROS & CONSTANTS =======
 #define MAX_SPINRATE (M_PI/6)

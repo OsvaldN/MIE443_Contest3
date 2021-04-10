@@ -57,6 +57,7 @@ add_executable(contest3
     src/frontier_search.cpp
 
     src/interaction.cpp
+    src/play_video.cpp
     src/control.cpp
     src/callback.cpp
     src/bumper.cpp
