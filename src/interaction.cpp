@@ -1,7 +1,7 @@
 #include <interaction.h>
 
 
-void Interact(int emotion, ros::Publisher *vel_pub, std::string path_to_sounds, bool verbose){
+void Interact(int emotion, ros::Publisher *vel_pub, bool verbose){
     /*
     Input an integer of the type of motion
     0 = Angry
@@ -13,16 +13,23 @@ void Interact(int emotion, ros::Publisher *vel_pub, std::string path_to_sounds, 
     6 = Neutral
     */
 
-    sound_play::SoundClient sc;
+    std::string path_to_sounds = ros::package::getPath("mie443_contest3") + "/sounds/"; // Path to sound files
+    sound_play::SoundClient sc; // client to play sounds
 
+    std::string path_to_videos = ros::package::getPath("mie443_contest3") + "/videos/"; // Path to sound files
+    std::string video_window_name = "Human, Robot Interface";
 
     if (emotion == 0){ // Angry
-
-        sc.playWave(path_to_sounds + "sound.wav"); // play Sound
 
         stepDistance(0.5, SPEED_LIM, vel_pub, true);
         stepDistance(0.5, SPEED_LIM, vel_pub, true, true);
         rotByAngle(-M_PI/6, vel_pub);
+
+        sc.playWave(path_to_sounds + "sound.wav"); // play Sound
+
+        std::string current_video = "test_video.mp4";
+        PlayVideo(path_to_videos, current_video, video_window_name);  
+
     }
     else if (emotion == 1){ // Disgust
 

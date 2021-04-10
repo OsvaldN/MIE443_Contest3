@@ -29,8 +29,8 @@ int main(int argc, char** argv) {
     explore::Explore explore;
     //
 
-    std::string path_to_sounds = ros::package::getPath("mie443_contest3") + "/sounds/"; // Path to sound files
-    sound_play::SoundClient sc;
+
+    sound_play::SoundClient sc; // client for sound
 
     // The code below shows how to start and stop frontier exploration.
     explore.stop();
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
         // Your code here.
 
     
-        Interact(0, &vel_pub, path_to_sounds, true);
+        Interact(0, &vel_pub, true);
 
         ros::spinOnce();
         ros::Duration(0.01).sleep();
