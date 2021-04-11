@@ -33,6 +33,7 @@ int main(int argc, char** argv) {
     sound_play::SoundClient sc; // client for sound
 
     // The code below shows how to start and stop frontier exploration.
+
     explore.stop();
     explore.start();
     while(ros::ok()) {
@@ -40,6 +41,12 @@ int main(int argc, char** argv) {
 
     
         Interact(0, &vel_pub, true);
+        Interact(1, &vel_pub, true);
+        Interact(2, &vel_pub, true);
+        Interact(3, &vel_pub, true);
+        Interact(4, &vel_pub, true);
+        Interact(5, &vel_pub, true);
+        Interact(6, &vel_pub, true);
 
         ros::spinOnce();
         ros::Duration(0.01).sleep();

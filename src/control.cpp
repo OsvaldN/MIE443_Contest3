@@ -71,6 +71,7 @@ int rotByAngle(float angle, ros::Publisher *vel_pub, bool verbose){
     return 0;
 }
 
+
 float eucDist(float x1, float y1, float x2, float y2){
     // returns euclidean distance between (x1,y1) and (x2,y2)
     return sqrt(pow((x2-x1), 2) + pow((y2-y1), 2) );
@@ -88,7 +89,7 @@ int stepDistance(float distance, float speed,ros::Publisher *vel_pub, bool verbo
     // get start values
     ros::spinOnce();
     float startX = posX, startY = posY;
-    float minLaserDistance; // Check the min distance from the laser reading
+    //float minLaserDistance; // Check the min distance from the laser reading
 
     if (verbose){
         ROS_INFO("Stepping %f units at speed: %f", distance, speed);
