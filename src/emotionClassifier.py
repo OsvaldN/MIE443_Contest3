@@ -24,7 +24,7 @@ class EmotionDetector(object):
         super(EmotionDetector, self).__init__()
         #
         # Load your emotion detector.
-        self.model = EmotionClassificationNet()
+        self.model = Ensemble()
         self.model.load_state_dict(torch.load(args.model_file)) 
         self.model.eval()
         #
