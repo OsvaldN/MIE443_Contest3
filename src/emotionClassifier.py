@@ -14,6 +14,7 @@ from emotionTrainingSample import EmotionClassificationNet
 from mie443_contest3.msg import EmotionMsg
 from mie443_contest3.msg import EmotionFaceMsg
 import matplotlib.pyplot as plt
+from ensemble import Ensemble
 
 class EmotionDetector(object):
 
@@ -23,15 +24,15 @@ class EmotionDetector(object):
         super(EmotionDetector, self).__init__()
         #
         # Load your emotion detector.
-        self.model = EmotionClassificationNet()
-        self.model.load_state_dict(torch.load(args.model_file))
+        self.model = Ensemble()
+        self.model.load_state_dict(torch.load(args.model_file)) 
         self.model.eval()
         #
         # Visualize.
         self.vis = args.vis
         print('Setting up subscribers.')
         self.emotion_sub = rospy.Subscriber('/emotion_img', EmotionFaceMsg, self.emotionsub)
-        self.emotion_pub = rospy.Publisher('/detected_emotion', Int32, self.emotionsub, queue_size=1)
+        self.emotion_pub = rospy.Publisher('/detected_emotion', Int32, queue_size=1)
         self.emotion_file = open('detectedVictim.txt', 'w')
 
     def showImBatch(self, imgs):
@@ -81,6 +82,7 @@ def getInputArgs():
 #
 #
 if __name__ == "__main__":
+    mdl = Ensemble()
     rospy.init_node('emotionDetector')
     args = getInputArgs()
     victim_locations = EmotionDetector(args)
