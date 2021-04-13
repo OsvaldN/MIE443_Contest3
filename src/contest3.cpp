@@ -2,12 +2,22 @@
 
 #include "contest3.h"
 #include "control.h"
+#include <std_msgs/Int32.h> 
 
 //
 // If you cannot find the sound play library try the following command.
 // sudo apt install ros-kinetic-sound-play
 
 #include <ros/console.h>
+
+#define EMOTION_NONE -1
+uint32_t emotion = EMOTION_NONE;
+
+void emotionCallback(const std_msgs::Int32::ConstPtr &msg) {
+    std::cout << "Emotion: " << msg->data << "\n\n";
+    emotion = msg->data;
+    return;
+}
 
 int main(int argc, char** argv) {
     //
@@ -28,28 +38,29 @@ int main(int argc, char** argv) {
     //
     // Frontier exploration algorithm.
     explore::Explore explore;
-    //
+
+    // Subscribe to emotion classifier
+    ros::Subscriber emotion_sub = n.subscribe("detected_emotion", 1, &emotionCallback);
 
 
     sound_play::SoundClient sc; // client for sound
 
     // Start exploration 
-    int return_val;
-    return_val = rotByAngle(M_PI, &vel_pub, true); // Start with a spin to initiate exploration functionality
+    int return_val = rotByAngle(M_PI, &vel_pub, true); // Start with a spin to initiate exploration functionality
     explore.start();
 
     while(ros::ok()) {
 
-        /** NOTE: Add the check for victim locator here from subscribed topic
-        if (victim_located) {
-            explore.stop(); // Stop exploration
+        if (emotion != EMOTION_NONE) { // Victim is located
+            explore.stop(); // Once a victim is found, stop exploration 
 
-        /** DEBUG REMOVE: @David's interaction code is found below.
-         * Ask Oz's model for the image type, and then pass that into Interact function
-            Interact(0, &vel_pub, path_to_sounds, true); // DEBUG REMOVE
+            std::cout << "Detected emotion: " << emotion << "\n\n"; // DEBUG REMOVE
+            Interact(emotion, &vel_pub, true);
+            
+            // Reset emotion parameters and resume exploration
+            emotion = EMOTION_NONE;
             explore.start(); // Re-continue exploration
         }
-        **/
 
         ros::spinOnce();
         ros::Duration(0.01).sleep();
