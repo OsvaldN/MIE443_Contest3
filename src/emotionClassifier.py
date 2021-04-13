@@ -14,6 +14,7 @@ from emotionTrainingSample import EmotionClassificationNet
 from mie443_contest3.msg import EmotionMsg
 from mie443_contest3.msg import EmotionFaceMsg
 import matplotlib.pyplot as plt
+from ensemble import Ensemble
 
 class EmotionDetector(object):
 
@@ -24,7 +25,7 @@ class EmotionDetector(object):
         #
         # Load your emotion detector.
         self.model = EmotionClassificationNet()
-        #self.model.load_state_dict(torch.load(args.model_file)) ## DEBUG REMOVE - This is to skip over the model loading step
+        self.model.load_state_dict(torch.load(args.model_file)) 
         self.model.eval()
         #
         # Visualize.
@@ -81,6 +82,7 @@ def getInputArgs():
 #
 #
 if __name__ == "__main__":
+    mdl = Ensemble()
     rospy.init_node('emotionDetector')
     args = getInputArgs()
     victim_locations = EmotionDetector(args)
