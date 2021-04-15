@@ -27,6 +27,15 @@
 #include "interaction.h"
 #include "play_video.h"
 
+
+
+
+// for writing in files
+#include <iostream>
+#include <fstream>
+#include <string>
+
+
 // ======= MACROS & CONSTANTS =======
 #define MAX_SPINRATE (M_PI/6)
 #define SPEED_LIM (0.25)
