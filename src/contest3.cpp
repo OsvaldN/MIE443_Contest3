@@ -46,13 +46,17 @@ int main(int argc, char** argv) {
     sound_play::SoundClient sc; // client for sound
 
     // Start exploration 
-    int return_val = rotByAngle(M_PI, &vel_pub, true); // Start with a spin to initiate exploration functionality
+    int return_val = rotByAngle(M_PI/4, &vel_pub, true); // Start with a spin to initiate exploration functionality
+    ROS_INFO("Finished initial rotation");
     explore.start();
+    ROS_INFO("Init Exploration started");
 
     while(ros::ok()) {
 
         if (emotion != EMOTION_NONE) { // Victim is located
+            ROS_INFO("Emotion detected");
             explore.stop(); // Once a victim is found, stop exploration 
+            ROS_INFO("Exploration stopped");
 
             std::cout << "Detected emotion: " << emotion << "\n\n"; // DEBUG REMOVE
             Interact(emotion, &vel_pub, true);

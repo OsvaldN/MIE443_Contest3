@@ -31,6 +31,8 @@ Open seven terminals. Navigate to `catkin_ws` in each of them. Build the project
 
 6. In terminal #6 run `roslaunch mie443_contest3 contest3.launch`
 
+**NOTE**: If exploration stops, re-launch contest 3 files by running the command again. Exploration related errors are outside of our problem scope as outlined [here.](https://piazza.com/class/kja4nxl2z3c6n1?cid=165)
+
 7. In terminal #7 run `rosrun sound_play soundplay_node.py`
 
 
