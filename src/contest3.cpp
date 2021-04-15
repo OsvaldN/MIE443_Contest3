@@ -4,12 +4,15 @@
 #include "control.h"
 #include <std_msgs/Int32.h> 
 
+using namespace std;
+
 //
 // If you cannot find the sound play library try the following command.
 // sudo apt install ros-kinetic-sound-play
 
 #include <ros/console.h>
 
+#define OutputFileName "Output_file.txt"
 #define EMOTION_NONE -1
 uint32_t emotion = EMOTION_NONE;
 
@@ -45,21 +48,38 @@ int main(int argc, char** argv) {
 
     sound_play::SoundClient sc; // client for sound
 
+    // Used to make the output file
+    // Make and overwrite any files 
+   
+    ofstream myfile;
+    myfile.open (OutputFileName);
+    myfile << "This is the output file which will contain the output for Contest 3 run.\n";
+    myfile.close();
+
+    std::string Emotions[7] = {"Angry",
+                              "Disgust",
+                              "Fear",
+                              "Happy",
+                              "Sad",
+                              "Surprise",
+                              "Neutral"};
+
     // Start exploration 
-    int return_val = rotByAngle(M_PI/4, &vel_pub, true); // Start with a spin to initiate exploration functionality
-    ROS_INFO("Finished initial rotation");
+    int return_val = rotByAngle(M_PI, &vel_pub, true); // Start with a spin to initiate exploration functionality
     explore.start();
-    ROS_INFO("Init Exploration started");
 
     while(ros::ok()) {
 
         if (emotion != EMOTION_NONE) { // Victim is located
-            ROS_INFO("Emotion detected");
             explore.stop(); // Once a victim is found, stop exploration 
-            ROS_INFO("Exploration stopped");
 
             std::cout << "Detected emotion: " << emotion << "\n\n"; // DEBUG REMOVE
+            std::cout << "Detected emotion: " << Emotions[emotion] << "\n\n"; // DEBUG REMOVE
             Interact(emotion, &vel_pub, true);
+
+            myfile.open(OutputFileName, std::ios_base::app); // append instead of overwrite
+            myfile << "The predicted emotion of the victim found is: " << Emotions[emotion] << "\n";
+            myfile.close();
             
             // Reset emotion parameters and resume exploration
             emotion = EMOTION_NONE;
